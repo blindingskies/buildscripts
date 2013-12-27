@@ -5,7 +5,7 @@ source `dirname $0`/build-options.cfg
 
 #COMMAND="xcodebuild test -workspace $PROJECT_DIR/$PROJECT_NAME.xcworkspace -sdk iphonesimulator -configuration Debug -scheme \"$TEST_SCHEME\" OTHER_CODE_SIGN_FLAGS=\"--keychain ${KEYCHAIN}\""
 
-COMMAND="xcodebuild test -workspace "$PROJECT_DIR"/$PROJECT_NAME.xcworkspace -sdk iphonesimulator -configuration Debug -scheme \"$TEST_SCHEME\" | xcpretty"
+COMMAND="xcodebuild test -workspace "$PROJECT_DIR"/$PROJECT_NAME.xcworkspace -sdk iphonesimulator -configuration Debug -scheme \"$TEST_SCHEME\""
 
 message "Running tests (sdk=iphonesimulator, scheme=$TEST_SCHEME)"
 TEST_OUTPUT="$LOG_DIR/testOutput.log"
@@ -15,7 +15,7 @@ if $VERBOSE; then
     COMMAND+=" 2>&1| tee $TEST_OUTPUT"
 else
     # cat is used on purpose, otherwise lines are jumbled by TEST SUCCEEDED message
-    COMMAND+=" 2>&1| cat > $TEST_OUTPUT" 
+    COMMAND+=" 2>&1| xcpretty | cat > $TEST_OUTPUT" 
 fi
 eval $COMMAND
 
