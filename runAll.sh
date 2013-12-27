@@ -8,7 +8,7 @@ pushd $SCRIPT_DIR > /dev/null
 ./pods.sh "$@"  
 ./test.sh "$@"
 ./build.sh "$@" 
-#./artifacts.sh "$@"
+./artifacts.sh "$@"
 
 popd > /dev/null
 

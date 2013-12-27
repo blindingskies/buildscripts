@@ -2,13 +2,14 @@
 
 # Load common functions
 source `dirname $0`/common.cfg
+source `dirname $0`/build-options.cfg
 
 PRODUCT_DIR=$OUTPUT_DIR/Build/Products/$CONFIGURATION-iphoneos 
 
-if [ ! -d $ARTIFACT_DIR ]; then
-     mkdir $ARTIFACT_DIR       
+if [ ! -d "$ARTIFACT_DIR" ]; then
+     mkdir "$ARTIFACT_DIR"       
 else                             
-     rm -rf $ARTIFACT_DIR/*
+     rm -rf "$ARTIFACT_DIR/*"
 fi
 
 IPA_OUT=${SCHEME// /_}
@@ -30,11 +31,11 @@ for filename in *.app.dSYM; do
 done                                       
 popdSilent
 
-message "Packaging for distribution"
-mkdir $ARTIFACT_DIR/Distribution
-CMD="`dirname $0`/ipasign.sh \"$ARTIFACT_DIR/${IPA_OUT}.ipa\" -p ~/Library/MobileDevice/Provisioning\ Profiles/${IPA_OUT}_Enterprise_Distribution.mobileprovision -c \"iPhone Distribution: Badoo Limited\" -o $ARTIFACT_DIR/Distribution/${IPA_OUT}_InHouse.ipa"
-echo $CMD
-eval $CMD
+#message "Packaging for distribution"
+#mkdir $ARTIFACT_DIR/Distribution
+#CMD="`dirname $0`/ipasign.sh \"$ARTIFACT_DIR/${IPA_OUT}.ipa\" -p ~/Library/MobileDevice/Provisioning\ Profiles/${IPA_OUT}_Enterprise_Distribution.mobileprovision -c \"iPhone Distribution: Badoo Limited\" -o $ARTIFACT_DIR/Distribution/${IPA_OUT}_InHouse.ipa"
+#echo $CMD
+#eval $CMD
 
 
 
