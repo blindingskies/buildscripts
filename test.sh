@@ -27,10 +27,10 @@ cat "$TEST_OUTPUT" | grep " failed \|TEST FAILED"
 if didFail; then 
     printWithColour " :(  " $COL_RED
 	echo -e "$RESULTS"
+	exit 1	
 else
     printWithColour " :)  " $COL_GREEN
 	echo -e "$RESULTS"
-	exit 1
 fi
 
 set -e
