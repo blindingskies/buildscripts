@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
-source `dirname $0`/common.cfg      
+source `dirname $0`/common.cfg
+source `dirname $0`/build-options.cfg
 
 #COMMAND="xcodebuild test -workspace $PROJECT_DIR/$PROJECT_NAME.xcworkspace -sdk iphonesimulator -configuration Debug -scheme \"$TEST_SCHEME\" OTHER_CODE_SIGN_FLAGS=\"--keychain ${KEYCHAIN}\""
 
-COMMAND="xcodebuild test -workspace "$PROJECT_DIR"/$PROJECT_NAME.xcworkspace -sdk iphonesimulator -configuration Debug -scheme \"$TEST_SCHEME\" | xcpretty -r junit"
+COMMAND="xcodebuild test -workspace "$PROJECT_DIR"/$PROJECT_NAME.xcworkspace -sdk iphonesimulator -configuration Debug -scheme \"$TEST_SCHEME\" | xcpretty"
 
 message "Running tests (sdk=iphonesimulator, scheme=$TEST_SCHEME)"
 TEST_OUTPUT="$LOG_DIR/testOutput.log"

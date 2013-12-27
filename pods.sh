@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-source `dirname $0`/common.cfg      
+source `dirname $0`/common.cfg
+source `dirname $0`/build-options.cfg
 
 if [ -f $PODS_ROOT/Manifest.lock ]; then
 	set +e
