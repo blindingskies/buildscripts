@@ -8,14 +8,13 @@ source `dirname $0`/build-options.cfg
 unlockKeychain
 message "Running xcodebuild"
 
-#COMMAND="xcodebuild -workspace $PROJECT_DIR/$PROJECT_NAME.xcworkspace -sdk iphoneos -configuration $CONFIGURATION -scheme '$SCHEME' -derivedDataPath $OUTPUT_DIR OTHER_CODE_SIGN_FLAGS=\"--keychain ${KEYCHAIN}\""
-COMMAND="xcodebuild -workspace $PROJECT_DIR/$PROJECT_NAME.xcworkspace -sdk iphoneos -configuration $CONFIGURATION -scheme '$SCHEME' -derivedDataPath $OUTPUT_DIR | xcpretty"
+COMMAND="xcodebuild -workspace $PROJECT_DIR/$PROJECT_NAME.xcworkspace -sdk iphoneos -configuration $CONFIGURATION -scheme '$SCHEME' -derivedDataPath $OUTPUT_DIR OTHER_CODE_SIGN_FLAGS=\"--keychain ${KEYCHAIN}\""
 BUILD_OUTPUT="$LOG_DIR/buildOutput.log"                                                                                       
 mkdir -p `dirname $BUILD_OUTPUT`
 if $VERBOSE; then                                                                                                           
     EXEC="$COMMAND 2>&1| tee $BUILD_OUTPUT"                                                                                      
 else                                                                                                                        
-    EXEC="$COMMAND 2>&1 > $BUILD_OUTPUT"     
+    EXEC="$COMMAND 2>&1| xcpretty > $BUILD_OUTPUT"     
 fi                                     
 
 set +e
