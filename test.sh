@@ -4,7 +4,7 @@ source `dirname $0`/common.cfg
 
 #COMMAND="xcodebuild test -workspace $PROJECT_DIR/$PROJECT_NAME.xcworkspace -sdk iphonesimulator -configuration Debug -scheme \"$TEST_SCHEME\" OTHER_CODE_SIGN_FLAGS=\"--keychain ${KEYCHAIN}\""
 
-COMMAND="xcodebuild test -workspace "$PROJECT_DIR"/$PROJECT_NAME.xcworkspace -sdk iphonesimulator -configuration Debug -scheme \"$TEST_SCHEME\""
+COMMAND="xcodebuild test -workspace "$PROJECT_DIR"/$PROJECT_NAME.xcworkspace -sdk iphonesimulator -configuration Debug -scheme \"$TEST_SCHEME\" | xcpretty -tc -r junit"
 
 message "Running tests (sdk=iphonesimulator, scheme=$TEST_SCHEME)"
 TEST_OUTPUT="$LOG_DIR/testOutput.log"
@@ -25,10 +25,10 @@ set +e
 RESULTS=`cat "$TEST_OUTPUT" | grep -i "executed" | tail -n 1`
 cat "$TEST_OUTPUT" | grep " failed \|TEST FAILED"
 if didFail; then 
-    printWithColour " :)  " $COL_GREEN
+    printWithColour " :(  " $COL_RED
 	echo -e "$RESULTS"
 else
-    printWithColour " :(  " $COL_RED
+    printWithColour " :)  " $COL_GREEN
 	echo -e "$RESULTS"
 	exit 1
 fi
