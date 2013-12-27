@@ -12,10 +12,10 @@ TEST_OUTPUT="$LOG_DIR/testOutput.log"
 mkdir -p "`dirname "$TEST_OUTPUT"`"
 
 if $VERBOSE; then 
-    COMMAND+=" 2>&1| tee $TEST_OUTPUT"
+    COMMAND+=" 2>&1| xcpretty | tee $TEST_OUTPUT"
 else
     # cat is used on purpose, otherwise lines are jumbled by TEST SUCCEEDED message
-    COMMAND+=" 2>&1| xcpretty | cat > $TEST_OUTPUT" 
+    COMMAND+=" 2>&1| cat > $TEST_OUTPUT" 
 fi
 eval $COMMAND
 
